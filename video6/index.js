@@ -1,0 +1,25 @@
+
+const express = require('express')
+const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+const Path = require("path");
+app.use(express.static(Path.join(__dirname, 'public')))
+app.set('view engine','ejs')
+
+app.get('/',(req,res)=> {
+    res.render('index')
+})
+
+app.get('/profile/:username',(req,res)=> {
+    res.send(`welcome , ${req.params.username}`)
+})
+
+app.get('/author/:username/:age', (req,res)=> {
+    res.send(`welcome, ${req.params.username} of the age ${req.params.age}`)
+})
+
+app.listen(3000, ()=>{
+    console.log("its running")
+})
